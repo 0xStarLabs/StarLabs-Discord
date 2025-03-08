@@ -50,7 +50,7 @@ pip install -r requirements.txt
 
 3. Configure your settings in `config.yaml`
 
-## �� Project Structure
+## 📁 Project Structure
 discord-automation-bot/
 ├── data/
 │ ├── accounts.xlsx # Discord accounts data
