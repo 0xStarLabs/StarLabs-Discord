@@ -51,7 +51,7 @@ pip install -r requirements.txt
 3. Configure your settings in `config.yaml`
 
 ## 📁 Project Structure
-discord-automation-bot/
+StarLabs-Discord/
 ├── data/
 │   ├── accounts.xlsx     # Discord accounts data
 │   ├── messages/         # Message templates
