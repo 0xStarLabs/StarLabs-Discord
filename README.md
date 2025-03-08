@@ -67,9 +67,17 @@ discord-automation-bot/
 ## 📝 Configuration
 
 ### 1. accounts.xlsx Structure
-Required columns:
-DISCORD_TOKEN | PROXY | USERNAME | STATUS | PASSWORD | NEW_PASSWORD | NEW_NAME | NEW_USERNAME | MESSAGES_FILE
-token1 | proxy1| user1 | VALID | pass1 | newpass1 | name1 | username1 | messages1
+| Column         | Example   | Description |
+|---------------|-----------|-------------|
+| DISCORD_TOKEN | token1    | Discord account token |
+| PROXY         | proxy1    | Proxy address (optional) |
+| USERNAME      | user1     | Account username |
+| STATUS        | VALID     | Account status |
+| PASSWORD      | pass1     | Current password |
+| NEW_PASSWORD  | newpass1  | New password for update |
+| NEW_NAME      | name1     | New display name |
+| NEW_USERNAME  | username1 | New username |
+| MESSAGES_FILE | messages1 | Custom messages file |
 
 
 ### 2. config.yaml Settings
