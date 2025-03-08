@@ -51,6 +51,7 @@ pip install -r requirements.txt
 3. Configure your settings in `config.yaml`
 
 ## 📁 Project Structure
+```
 StarLabs-Discord/
 ├── data/
 │   ├── accounts.xlsx     # Discord accounts data
@@ -62,6 +63,7 @@ StarLabs-Discord/
 │       ├── reader.py     # File handling utilities
 │       └── ...
 └── config.yaml          # Main configuration file
+```
 
 
 ## 📝 Configuration
