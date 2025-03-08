@@ -1,0 +1,99 @@
+SETTINGS:
+    # discord token use for press reaction task etc, for getting emojis info
+    DISCORD_TOKEN_FOR_PARSING: ""
+    # proxy for parsing. format: username:password@ip:port
+    PROXY_FOR_PARSING: ""
+
+    # number of concurrent threads
+    THREADS: 1
+
+    # number of retries for ANY action
+    ATTEMPTS: 5
+
+    # shuffle accounts in random order
+    SHUFFLE_ACCOUNTS: true
+
+    # account range.
+    # BY DEFAULT: [0, 0] - all accounts
+    # [3, 5] - only 3 4 5 accounts
+    # [7, 7] - only 7 account
+    ACCOUNTS_RANGE: [0, 0]
+
+    # WORKS ONLY IF ACCOUNTS_RANGE IS [0, 0]
+    # exact accounts to use. 
+    # BY DEFAULT: [] - all accounts
+    # Example: [1, 4, 6] - bot will use only 1, 4 and 6 accounts
+    EXACT_ACCOUNTS_TO_USE: []
+
+    # pause between attempts
+    PAUSE_BETWEEN_ATTEMPTS: [1, 2]
+
+    # pause in seconds between accounts
+    RANDOM_PAUSE_BETWEEN_ACCOUNTS: [1, 2]
+
+    # pause in seconds between actions
+    RANDOM_PAUSE_BETWEEN_ACTIONS: [1, 2]
+
+    # random pause before start of every account
+    # to make sure that all accounts will be started at different times
+    RANDOM_INITIALIZATION_PAUSE: [1, 2]
+
+    # use random profile pictures for change profile picture task
+    RANDOM_PROFILE_PICTURES: true
+
+
+AI_CHATTER:
+    # discord server id where bot will send messages
+    GUILD_ID: ""
+
+    # discord channel id where bot will send messages
+    CHANNEL_ID: ""
+
+    # if a bot is asked something, what is the probability that it will answer or ignore the question
+    ANSWER_PERCENTAGE: 50
+
+    # How many percent of texts will be REPLY to other users' texts
+    # the rest of the sms will just be sent to the chat.
+    # if 0, the bot will answer to no one
+    # if 100, the bot will send only replies to other users' sms.
+    REPLY_PERCENTAGE: 50
+
+    # number of messages to send
+    MESSAGES_TO_SEND_PER_ACCOUNT: [3, 5]
+
+    # pause between messages
+    PAUSE_BETWEEN_MESSAGES: [3, 5]
+
+    # pause after getting response from chatgpt and before sending message to discord
+    PAUSE_BEFORE_MESSAGE: [1, 2]
+    
+
+MESSAGE_SENDER:
+    # discord server id where bot will send messages
+    GUILD_ID: ""
+
+    # discord channel id where bot will send messages
+    CHANNEL_ID: ""
+    
+    # delete message instantly after sending
+    DELETE_MESSAGE_INSTANTLY: false
+
+    # send messages randomly
+    SEND_MESSAGES_RANDOMLY: false
+
+    # number of messages to send FOR EACH ACCOUNT. SO EACH ACCOUNT WILL SEND THIS AMOUNT OF MESSAGES
+    NUMBER_OF_MESSAGES_TO_SEND: 3
+
+    # pause between messages
+    PAUSE_BETWEEN_MESSAGES: [1, 5]
+
+
+CHAT_GPT:
+    # list of api keys. bot will use random api key for every message.
+    API_KEYS: ["sk-proj-"]
+    # chatgpt model to use. https://platform.openai.com/docs/models
+    MODEL: "gpt-4o"
+
+    # in some countries you may need to use proxy to access chatgpt.
+    # by default it's empty. format: username:password@ip:port
+    PROXY_FOR_CHAT_GPT: ""
