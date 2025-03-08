@@ -53,15 +53,15 @@ pip install -r requirements.txt
 ## 📁 Project Structure
 discord-automation-bot/
 ├── data/
-│ ├── accounts.xlsx # Discord accounts data
-│ ├── messages/ # Message templates
-│ └── pictures/ # Profile pictures
+│   ├── accounts.xlsx     # Discord accounts data
+│   ├── messages/         # Message templates
+│   └── pictures/         # Profile pictures
 ├── src/
-│ └── utils/
-│ ├── constants.py # Configuration constants
-│ ├── reader.py # File handling utilities
-│ └── ...
-└── config.yaml # Main configuration file
+│   └── utils/
+│       ├── constants.py  # Configuration constants
+│       ├── reader.py     # File handling utilities
+│       └── ...
+└── config.yaml          # Main configuration file
 
 
 ## 📝 Configuration
