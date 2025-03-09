@@ -90,8 +90,6 @@ async def start():
 
     await asyncio.gather(*tasks)
 
-    logger.success("Saved accounts and private keys to a file.")
-
 
 async def account_flow(account: Account, config: src.utils.config.Config):
     try:

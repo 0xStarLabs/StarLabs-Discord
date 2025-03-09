@@ -1,3 +1,4 @@
+from loguru import logger
 from openai import OpenAI
 from typing import Optional
 import httpx
@@ -18,6 +19,7 @@ def ask_chatgpt(api_key: str, model: str, user_message: str, prompt: str, proxy:
     """
 
     if proxy:
+        logger.info(f"Using proxy: {proxy} for ChatGPT")
         # Format proxy URL with scheme if not present
         if not proxy.startswith(("http://", "https://")):
             proxy = f"http://{proxy}"
