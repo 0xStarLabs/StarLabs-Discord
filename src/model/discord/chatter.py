@@ -291,6 +291,9 @@ class DiscordChatter:
                 headers=headers,
                 json=json_data,
             )
+            if "This action cannot be performed due to slowmode rate limit" in response.text:
+                logger.info(f"{self.account.index} | Slowmode rate limit. Pausing for 10 seconds.")
+                await asyncio.sleep(10)
 
             return response.status_code == 200, response.json()
 
