@@ -10,6 +10,7 @@ A powerful and flexible Discord automation tool with multiple features and paral
 - 🎭 AI Chat integration with GPT-4
 - 🔒 Secure file handling with thread-safe operations
 - 📊 Detailed logging system
+- 📋 GitHub version checker
 
 ### 🎯 Available Actions:
 - AI Chatter
