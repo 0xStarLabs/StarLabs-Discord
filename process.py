@@ -21,7 +21,7 @@ async def start():
     show_dev_info()
 
     try:
-        await check_version("0xStarLabs", "StarLabs-Monad")
+        await check_version("0xStarLabs", "StarLabs-Discord")
     except Exception as e:
         import traceback
 

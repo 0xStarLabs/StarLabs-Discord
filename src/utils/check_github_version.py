@@ -29,6 +29,7 @@ async def get_github_last_commit(
                     async with session.get(url, headers=headers) as response:
                         if response.status == 200:
                             data = await response.json()
+
                             return (
                                 data["sha"][:7],
                                 data["commit"]["author"]["date"],
@@ -90,49 +91,22 @@ async def compare_versions(
         github_dt = datetime.fromisoformat(github_date.replace("Z", "+00:00"))
         formatted_date = github_dt.strftime("%d.%m.%Y %H:%M UTC")
 
-        # If no local version found, initialize it
-        if local_hash is None or local_date is None:
-            return (False, "")
-
-        # Convert both dates to UTC
-        local_dt = datetime.fromisoformat(local_date.replace("Z", "+00:00"))
-
-        # Ensure both dates are UTC
-        if github_dt.tzinfo is None:
-            github_dt = github_dt.replace(tzinfo=timezone.utc)
-        if local_dt.tzinfo is None:
-            local_dt = local_dt.replace(tzinfo=timezone.utc)
-
+        # Если хеши совпадают - у нас последняя версия
         if local_hash == github_hash:
             return (
                 True,
                 f"✅ You have the latest version (commit from {formatted_date})",
             )
-        print(local_dt, github_dt)
-        if local_dt < github_dt:
-            time_diff = github_dt - local_dt
-            if time_diff.days > 0:
-                time_str = f"{time_diff.days} days"
-            elif time_diff.seconds // 3600 > 0:
-                hours = time_diff.seconds // 3600
-                time_str = f"{hours} hour{'s' if hours > 1 else ''}"
-            else:
-                minutes = time_diff.seconds // 60
-                time_str = f"{minutes} minute{'s' if minutes > 1 else ''}"
 
-            return (
-                False,
-                f"⚠️ Update available!\n"
-                f"📅 Latest update released: {formatted_date}\n"
-                f"⏰ Your version is {time_str} behind\n"
-                f"ℹ️ To update, use: git pull\n"
-                f"📥 Or download from: https://github.com/0xStarLabs/StarLabs-Monad",
-            )
-        else:
-            return (
-                True,
-                f"❓ Local version ({local_hash}) is newer than GitHub ({github_hash})",
-            )
+        # Если хеши разные - нужно обновление
+        return (
+            False,
+            f"⚠️ Update available!\n"
+            f"📅 Latest update released: {formatted_date}\n"
+            f"ℹ️ To update, use: git pull\n"
+            f"📥 Or download from: https://github.com/0xStarLabs/StarLabs-Discord",
+        )
+
     except Exception as e:
         print(f"❌ Error comparing versions: {e}")
         return False, "Error comparing versions"
@@ -156,24 +130,35 @@ async def check_version(repo_owner: str, repo_name: str) -> bool:
     """
     Main function to check versions and print status
     """
+    print("🔍 Checking version...")
 
-    # Сначала получаем время с GitHub, оно будет нашей точкой отсчета
+    # Получаем информацию о последнем коммите с GitHub
     github_hash, github_date, commit_message = await get_github_last_commit(
         repo_owner, repo_name
     )
 
-    # При первом запуске используем время GitHub вместо локального
-    local_hash, _ = get_local_commit_info()
-    local_date = github_date if local_hash is None else _
+    # Получаем локальную версию
+    local_hash, local_date = get_local_commit_info()
 
+    # Если это первый запуск
+    if local_hash is None:
+        save_current_version(github_hash, github_date)
+        github_dt = datetime.fromisoformat(github_date.replace("Z", "+00:00"))
+        formatted_date = github_dt.strftime("%d.%m.%Y %H:%M UTC")
+        print(
+            f"📥 Initializing version tracking...\n"
+            f"📅 Current version from: {formatted_date}\n"
+        )
+        return True
+
+    # Сравниваем версии
     is_latest, message = await compare_versions(
         local_date, github_date, local_hash, github_hash, commit_message
     )
-    if message:
-        print(message)
+    print(message)
 
-    # При сохранении всегда используем время с GitHub
-    if local_hash is None or is_latest:
+    # Если версии разные, обновляем локальную версию
+    if not is_latest:
         save_current_version(github_hash, github_date)
 
     return is_latest
