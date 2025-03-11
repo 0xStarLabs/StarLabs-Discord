@@ -9,6 +9,7 @@ from src.utils.output import show_dev_info, show_logo, show_menu
 from src.utils.reader import read_xlsx_accounts
 from src.utils.constants import ACCOUNTS_FILE, Account
 import src.model
+from src.utils.check_github_version import check_version
 
 
 async def start():
@@ -18,10 +19,23 @@ async def start():
 
     show_logo()
     show_dev_info()
+
+    try:
+        await check_version("0xStarLabs", "StarLabs-Monad")
+    except Exception as e:
+        import traceback
+
+        traceback.print_exc()
+        logger.error(f"Failed to check version: {e}")
+        logger.info("Continue with current version\n")
+
+    print("")
+
     config = src.utils.get_config()
 
     task = show_menu(src.utils.constants.MAIN_MENU_OPTIONS)
-    if task == "Exit": return
+    if task == "Exit":
+        return
 
     config.DATA_FOR_TASKS = await prepare_data(config, task)
 

@@ -2,14 +2,12 @@ from loguru import logger
 import urllib3
 import sys
 import asyncio
-
 from process import start
 
 
 async def main():
     configuration()
     await start()
-
 
 def configuration():
     urllib3.disable_warnings()
