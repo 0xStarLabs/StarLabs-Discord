@@ -147,7 +147,7 @@ async def check_version(repo_owner: str, repo_name: str) -> bool:
         formatted_date = github_dt.strftime("%d.%m.%Y %H:%M UTC")
         print(
             f"📥 Initializing version tracking...\n"
-            f"📅 Current version from: {formatted_date}\n"
+            f"📅 Current version from: {formatted_date} \n"
         )
         return True
 
