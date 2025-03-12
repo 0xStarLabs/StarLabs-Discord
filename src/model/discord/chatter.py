@@ -2,7 +2,7 @@ import asyncio
 from dataclasses import dataclass
 from loguru import logger
 import random
-from curl_cffi.requests import AsyncSession 
+from curl_cffi.requests import AsyncSession
 
 
 from src.model.discord.utils import calculate_nonce
@@ -56,7 +56,8 @@ class DiscordChatter:
                     replied_to_me = False
 
                     last_messages = await self._get_last_chat_messages(
-                        self.config.AI_CHATTER.GUILD_ID, self.config.AI_CHATTER.CHANNEL_ID
+                        self.config.AI_CHATTER.GUILD_ID,
+                        self.config.AI_CHATTER.CHANNEL_ID,
                     )
                     logger.info(
                         f"{self.account.index} | Last messages: {len(last_messages)} "
@@ -291,8 +292,13 @@ class DiscordChatter:
                 headers=headers,
                 json=json_data,
             )
-            if "This action cannot be performed due to slowmode rate limit" in response.text:
-                logger.info(f"{self.account.index} | Slowmode rate limit. Pausing for 10 seconds.")
+            if (
+                "This action cannot be performed due to slowmode rate limit"
+                in response.text
+            ):
+                logger.info(
+                    f"{self.account.index} | Slowmode rate limit. Pausing for 10 seconds."
+                )
                 await asyncio.sleep(10)
 
             return response.status_code == 200, response.json()
@@ -326,7 +332,7 @@ class DiscordChatter:
 
             if response.status_code != 200:
                 logger.error(
-                    f"Error in _get_last_chat_messages: {response.status_code}"
+                    f"Error in _get_last_chat_messages: {response.status_code} | {response.text}"
                 )
                 return []
 
