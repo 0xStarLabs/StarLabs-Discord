@@ -2,6 +2,10 @@
 
 A powerful and flexible Discord automation tool with multiple features and parallel processing capabilities.
 
+## 📚 Documentation & Tutorials
+> ### [📖 English Tutorial](https://star-labs.gitbook.io/star-labs/discord/eng)
+> ### [📖 Russian Tutorial](https://star-labs.gitbook.io/star-labs/discord/ru)
+
 ## 🌟 Features
 - ✨ Multi-threaded processing
 - 🔄 Automatic retries with configurable attempts
