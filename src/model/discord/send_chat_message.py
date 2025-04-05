@@ -20,7 +20,11 @@ async def message_sender(account: Account, config: Config, session: AsyncSession
                     if config.MESSAGE_SENDER.SEND_MESSAGES_RANDOMLY:
                         message_to_send = random.choice(account.messages_to_send)
                     else:
-                        message_to_send = account.messages_to_send[message_number]
+                        if message_number >= len(account.messages_to_send):
+                            logger.error(f"{account.index} | Not enough messages to send. Please add more messages to the list.")
+                            return False
+                        else:
+                            message_to_send = account.messages_to_send[message_number]
 
                     message_id = await send_chat_message(account, config, session, config.MESSAGE_SENDER.GUILD_ID, config.MESSAGE_SENDER.CHANNEL_ID, message_to_send)
                     

@@ -200,7 +200,7 @@ class AccountEditor:
 
             except Exception as e:
                 random_sleep = random.randint(self.config.SETTINGS.PAUSE_BETWEEN_ATTEMPTS[0], self.config.SETTINGS.PAUSE_BETWEEN_ATTEMPTS[1])
-                logger.error(f"{self.account.index} | Error changing name: {e}. Retrying in {random_sleep} seconds...")
+                logger.error(f"{self.account.index} | Error changing picture: {e}. Retrying in {random_sleep} seconds...")
                 await asyncio.sleep(random_sleep)
 
         return False
