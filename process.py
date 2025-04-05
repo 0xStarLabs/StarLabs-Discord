@@ -20,15 +20,6 @@ async def start():
     show_logo()
     show_dev_info()
 
-    try:
-        await check_version("0xStarLabs", "StarLabs-Discord")
-    except Exception as e:
-        import traceback
-
-        traceback.print_exc()
-        logger.error(f"Failed to check version: {e}")
-        logger.info("Continue with current version\n")
-
     print("")
 
     config = src.utils.get_config()
